@@ -7,36 +7,44 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Satellite TV',
-            style: TextStyle(
-              color: Colors.white,
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {},
             ),
-          ),
-        ),
-        body: OrientationBuilder(
-          builder: (context, orientation) {
-            return GridView.count(
-              crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-              crossAxisSpacing: 2.0,
-              children: List.generate(
-                6,
-                (index) {
-                  return Image.asset(
-                    'images/image$index.png',
-                    width: 200.0,
-                    height: 200.0,
-                  );
-                },
+            title: Text('Tabs'),
+            bottom: TabBar(tabs: [
+              Tab(
+                child: Text('Home'),
               ),
-            );
-          },
+              Tab(
+                child: Text('Channel Numbers'),
+              ),
+              Tab(
+                child: Text('Packages'),
+              ),
+            ]),
+          ),
+          body: TabBarView(children: [
+            Card(
+              color: Colors.yellow,
+              child: Text("Home"),
+            ),
+            Card(
+              color: Colors.orange,
+              child: Text("Channel Numbers"),
+            ),
+            Card(
+              color: Colors.lightGreen,
+              child: Text("Packages"),
+            ),
+          ]),
         ),
       ),
     );
